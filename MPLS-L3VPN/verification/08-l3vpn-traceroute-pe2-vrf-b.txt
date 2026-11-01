@@ -1,0 +1,8 @@
+! PE2 to CE-B1 inside VRF B. Label 16 is the transport label for PE1's loopback and 23 is the
+! VPN label PE1 gave to VRF B's 10.1.1.0/24.
+PE2#traceroute vrf B 10.1.1.1
+VRF info: (vrf in name/id, vrf out name/id)
+  1 10.0.0.9 [MPLS: Labels 16/23 Exp 0] 440 msec 96 msec 452 msec
+  2 10.0.0.5 [MPLS: Labels 16/23 Exp 0] 500 msec 100 msec 68 msec
+  3 192.168.2.1 [MPLS: Label 23 Exp 0] 412 msec 80 msec 64 msec
+  4 192.168.2.2 156 msec 52 msec 68 msec

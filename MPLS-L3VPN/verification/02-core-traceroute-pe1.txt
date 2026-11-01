@@ -1,0 +1,7 @@
+! Traceroute from PE1 across the core. Hops 1 and 2 arrive with a label. Hop 3 arrives as plain IP
+! because P2 popped the label one hop early (PE2 advertised implicit-null).
+PE1#traceroute 2.2.2.2 source 1.1.1.1
+VRF info: (vrf in name/id, vrf out name/id)
+  1 10.0.0.2 [MPLS: Label 17 Exp 0] 64 msec 456 msec 380 msec
+  2 10.0.0.6 [MPLS: Label 17 Exp 0] 364 msec 60 msec 44 msec
+  3 10.0.0.10 128 msec 52 msec 44 msec

@@ -1,0 +1,7 @@
+! P1 keeps a label from every neighbour for PE2's loopback (the LIB), but it only forwards
+! with the one from its IGP next hop. That is P2's label 17. PE1's label 16 just sits in the table.
+P1#show mpls ldp bindings 2.2.2.2 32
+  lib entry: 2.2.2.2/32, rev 4
+	local binding:  label: 17
+	remote binding: lsr: 1.1.1.1:0, label: 16
+	remote binding: lsr: 4.4.4.4:0, label: 17

@@ -1,0 +1,14 @@
+! Labels PE1 handed out for its own customer routes. No Label toward a CE is normal, since the CE
+! doesn't run MPLS and PE1 just pops the VPN label and sends plain IP.
+PE1#show mpls forwarding-table vrf A
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop
+Label      Label      or Tunnel Id     Switched      interface
+21         No Label   10.1.1.0/24[V]   0             Fa0/1      192.168.1.2
+22         No Label   192.168.1.0/30[V]   \
+                                       0             aggregate/A
+
+PE1#show mpls forwarding-table vrf B
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop
+Label      Label      or Tunnel Id     Switched      interface
+23         No Label   10.1.1.0/24[V]   0             Fa1/0      192.168.2.2
+24         No Label   192.168.2.0/24[V]   \

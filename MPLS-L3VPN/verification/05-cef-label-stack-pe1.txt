@@ -1,0 +1,11 @@
+! How PE1 sends a packet to 10.1.2.0/24 in VRF A. Label 21 is the VPN label PE2 gave it and
+! label 17 is the LDP transport label from P1.
+PE1#show ip cef vrf A 10.1.2.0 255.255.255.0 detail
+10.1.2.0/24, epoch 0, flags rib defined all labels
+  recursive via 2.2.2.2 label 21
+    nexthop 10.0.0.2 FastEthernet0/0 label 17
+
+! Captured again later, after LDP had handed out new labels. The transport label changed, the VPN label did not.
+PE1#show ip cef vrf A 10.1.2.1
+10.1.2.0/24
+  nexthop 10.0.0.2 FastEthernet0/0 label 18 21

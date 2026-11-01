@@ -1,0 +1,22 @@
+! LDP-IGP sync on P2 (mpls ldp sync under OSPF) after I removed mpls ip from Fa0/0.
+! Fa0/0 says sync not achieved, and Fa0/1 toward PE2 is fine.
+P2#show mpls ldp igp sync
+FastEthernet0/0:
+	LDP not configured; LDP-IGP Synchronization enabled.
+	Sync status: sync not achieved; peer reachable.
+	Sync delay time: 0 seconds (0 seconds left)
+	IGP holddown time: infinite.
+	IGP enabled: 1
+FastEthernet0/1:
+	LDP configured; LDP-IGP Synchronization enabled.
+	Sync status: sync achieved; peer reachable.
+	Sync delay time: 0 seconds (0 seconds left)
+	IGP holddown time: infinite.
+	Peer LDP Ident: 2.2.2.2:0
+	IGP enabled: 1
+
+! Note: show ip ospf interface still shows the configured cost of 1, not any sync penalty.
+P2#show ip ospf interface fa0/0
+FastEthernet0/0 is up, line protocol is up
+  Internet Address 10.0.0.6/30, Area 0, Attached via Interface Enable
+  Process ID 1, Router ID 4.4.4.4, Network Type POINT_TO_POINT, Cost: 1

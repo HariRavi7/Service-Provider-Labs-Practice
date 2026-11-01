@@ -1,0 +1,10 @@
+! CE-A1 to CE-A2 across the VPN. Hop 1 has no label because the packet arrives as plain IP and
+! PE1 pushes the labels. Hops 2 and 3 show transport and VPN labels. At hop 4 only the VPN label
+! is left, since P2 popped the transport label.
+CE-A1#traceroute 10.1.2.1 source 10.1.1.1
+VRF info: (vrf in name/id, vrf out name/id)
+  1 192.168.1.1 72 msec 32 msec 32 msec
+  2 10.0.0.2 [MPLS: Labels 18/21 Exp 0] 232 msec 44 msec 60 msec
+  3 10.0.0.6 [MPLS: Labels 17/21 Exp 0] 280 msec 128 msec 84 msec
+  4 192.168.3.1 [MPLS: Label 21 Exp 0] 124 msec 68 msec 84 msec
+  5 192.168.3.2 140 msec 68 msec 84 msec

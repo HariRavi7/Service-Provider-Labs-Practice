@@ -1,0 +1,10 @@
+! Fault drill: I ran no mpls ip on P2's Fa0/1 (the link to PE2). Ping and traceroute from PE1
+! still worked because OSPF still forwards plain IP. The proof was in the forwarding table.
+PE1#traceroute 2.2.2.2 source 1.1.1.1
+VRF info: (vrf in name/id, vrf out name/id)
+  1 10.0.0.2 [MPLS: Label 17 Exp 0] 8 msec 172 msec 192 msec
+  2 10.0.0.6 [MPLS: Label 17 Exp 0] 740 msec 72 msec 28 msec
+  3 10.0.0.10 76 msec 508 msec 56 msec
+
+P2#show mpls forwarding-table 2.2.2.2 32
+! The Outgoing Label column on P2 now says No Label. It said Pop Label before the fault.

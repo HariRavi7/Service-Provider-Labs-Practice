@@ -1,0 +1,27 @@
+! PE2's forwarding table (the labels PE2 handed out) and how it reaches PE1's customer LAN.
+PE2#show mpls forwarding-table
+Local      Outgoing   Prefix           Bytes Label   Outgoing   Next Hop
+Label      Label      or Tunnel Id     Switched      interface
+16         Pop Label  4.4.4.4/32       0             Fa0/0      10.0.0.9
+17         Pop Label  10.0.0.4/30      0             Fa0/0      10.0.0.9
+18         17         3.3.3.3/32       0             Fa0/0      10.0.0.9
+19         18         1.1.1.1/32       0             Fa0/0      10.0.0.9
+20         19         10.0.0.0/30      0             Fa0/0      10.0.0.9
+21         No Label   10.1.2.0/24[V]   0             Fa0/1      192.168.3.2
+22         No Label   192.168.3.0/30[V]   \
+                                       0             aggregate/A
+23         No Label   10.1.2.0/24[V]   0             Fa1/0      192.168.4.2
+24         No Label   192.168.4.0/30[V]   \
+
+! I trimmed this to the entries that matter. The rest was normal CEF noise.
+PE2#show ip cef vrf A detail
+10.1.1.0/24, epoch 0, flags rib defined all labels
+  recursive via 1.1.1.1 label 21
+    nexthop 10.0.0.9 FastEthernet0/0 label 18
+10.1.2.0/24, epoch 0
+  local label info: other/21
+  recursive via 192.168.3.2
+    attached to FastEthernet0/1
+192.168.1.0/30, epoch 0, flags rib defined all labels
+  recursive via 1.1.1.1 label 22
+    nexthop 10.0.0.9 FastEthernet0/0 label 18

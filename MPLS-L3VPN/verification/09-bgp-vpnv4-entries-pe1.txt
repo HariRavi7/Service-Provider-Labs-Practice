@@ -1,0 +1,23 @@
+! Both customers have 10.1.2.0/24. The RD (65000:1 vs 65000:2) keeps them apart in BGP, and the
+! route target decides which VRF takes each one (table A or table B).
+PE1#show bgp vpnv4 unicast all 10.1.2.0/24
+BGP routing table entry for 65000:1:10.1.2.0/24, version 7
+Paths: (1 available, best #1, table A)
+  Not advertised to any peer
+  Refresh Epoch 2
+  Local
+    2.2.2.2 (metric 4) from 2.2.2.2 (2.2.2.2)
+      Origin incomplete, metric 0, localpref 100, valid, internal, best
+      Extended Community: RT:65000:1
+      mpls labels in/out nolabel/21
+      rx pathid: 0, tx pathid: 0x0
+BGP routing table entry for 65000:2:10.1.2.0/24, version 11
+Paths: (1 available, best #1, table B)
+  Not advertised to any peer
+  Refresh Epoch 2
+  Local
+    2.2.2.2 (metric 4) from 2.2.2.2 (2.2.2.2)
+      Origin incomplete, metric 0, localpref 100, valid, internal, best
+      Extended Community: RT:65000:2
+      mpls labels in/out nolabel/23
+      rx pathid: 0, tx pathid: 0x0
